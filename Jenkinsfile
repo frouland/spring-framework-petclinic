@@ -11,5 +11,11 @@ pipeline {
                 sh 'mvn -B -DskipTests -DproxySet=true -DproxyHost=marc.proxy.corp.sopra -DproxyPort=8080 clean package' 
             }
         }
+		
+		stage('Build2') { 
+            steps {
+                sh 'mvn -B -DskipTests -DproxySet=true -DproxyHost=marc.proxy.corp.sopra -DproxyPort=8080 clean package' 
+            }
+        }
     }
 }

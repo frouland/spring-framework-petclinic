@@ -11,10 +11,18 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Building...'
-                sh 'mvn clean install'
-                archiveArtifacts 'target/*.war'
+                parallel(
+                  build: {
+                    echo 'Building...'
+                    sh 'mvn clean install'
+                    archiveArtifacts 'target/*.war'
+                  },
+                  sonar: {
+                    echo "Analyse Sonar..."
+                  }
+                )                
             }
+            
         }
         stage('Deploy') {
             steps {

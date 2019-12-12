@@ -1,14 +1,14 @@
 node {
     stage 'checkout'
-    git 'https://gitlab.com/RavisankarCts/hello-world.git' 
+    git 'https://github.com/frouland/spring-framework-petclinic.git' 
     
-    stage 'build'
-    sh 'mvn clean install'
-    
-    stage('Results - 1') {
-         junit '**/target/surefire-reports/TEST-*.xml'
-         archiveArtifacts 'target/*.jar'
+    stage ('build') {
+        sh 'mvn clean install'
+        archiveArtifacts 'target/*.war'
     }
     
+    stage('deploy') {
+         sh 'cp target/*.war /var/tmp'
+    }
    
 }
